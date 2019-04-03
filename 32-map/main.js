@@ -1,6 +1,6 @@
 /*global BMap BMAP_NORMAL_MAP BMAP_HYBRID_MAP $:true*/
 $(function(){
-  var map = new BMap.Map('main');  
+  var map = new BMap.Map('allmap');  
   map.centerAndZoom('河北师范大学软件学院', 25);
 
   // 添加地图类型控件
