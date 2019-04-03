@@ -8,6 +8,6 @@ $(function(){
       BMAP_HYBRID_MAP
     ]
   }));    
-  map.setCurrentCity('石家庄');
+  map.setCurrentCity('石家庄市');
   map.enableScrollWheelZoom(true); 
 });
