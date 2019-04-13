@@ -1,15 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>MAP</title>
-  <link rel="stylesheet" href="layout.css">
-  <link rel="icon" href="https://i.wangding.in/favicon.ico" sizes="48x48" type="image/png">
-</head>
-<body>
-<div id="allmap"></div>
-<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=Dum8xyPGIDjw29tYahgnq0msEv4oZlKf"></script>
-<script src="main.js"></script>
-</body>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+  <style type="text/css">
+    body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+  </style>
+  <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=Dum8xyPGIDjw29tYahgnq0msEv4oZlKf"></script>
+  <title>地图展示</title>
+  </head>
+  <body>
+    <div id="allmap"></div>
+  </body>
 </html>
+<script type="text/javascript">
+  // 百度地图API功能
+  var map = new BMap.Map("allmap");    // 创建Map实例
+  map.centerAndZoom('河北师范大学软件学院', 25);   // 初始化地图,设置中心点坐标和地图级别
+  //添加地图类型控件
+  map.addControl(new BMap.MapTypeControl({
+    mapTypes:[
+      BMAP_HYBRID_MAP,
+      BMAP_NORMAL_MAP
+    ]
+  }));    
+  map.setCurrentCity("石家庄市");          // 设置地图显示的城市 此项是必须设置的
+  map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+
+  var point = new BMap.Point(114.529963, 38.003679);
+  var marker = new BMap.Marker(point, {'title': '河北师大软件学院'}); 
+  marker.setAnimation(BMAP_ANIMATION_BOUNCE);
+
+  map.addOverlay(marker);
+  var opts = {
+    width : 300,     // 信息窗口宽度
+    height: 140,     // 信息窗口高度
+    title : '<strong>河北师大软件学院</strong>' 
+  };
+
+  var infoWindow = new BMap.InfoWindow(''
+      + '<div style="width: 250px">'
+        + '<p>'
+          + '我是Daenerys<br>'
+          + '我在这里'
+        + '</p>'
+      + '</div>', opts);
+
+  marker.openInfoWindow(infoWindow);
+
+  marker.addEventListener('click', function(){          
+    map.openInfoWindow(infoWindow, point);
+  });
+</script>

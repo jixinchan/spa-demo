@@ -5,4 +5,13 @@ body,html {
   width:100%;
 }
 
+.main{
+  padding:40px;
+}
 
+i{
+  bottom:39px;
+  color:#fff;
+  left:96%;
+  position:relative;
+}
