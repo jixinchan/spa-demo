@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>密码可见组件测试</title>
+  <link rel="stylesheet" href="pwdvisual.css">
+  <link rel="icon" href="https://i.wangding.in/favicon.ico" sizes="48x48" type="image/png">
+</head>
+<body>
+<input type="button" class="add" value="添加组件"/>
+<input type="button" class="show" value="显示密码"/>
+<div class="main">
+</div>
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="pwdvisual.js"></script>
+<script>
+$(function(){
+  var $addBtn=$('input.add'),$showBtn=$('input.show');
+  var pwdArr=[];
+  $addBtn.click(function(){
+    
+    var btn=new PwdVisual({'container':'.main'});
+    pwdArr.push(btn);
+  });
+  $showBtn.click(function(){
+    pwdArr.forEach((item)=>{
+      alert(item.getPwd());
+    });
+  });
+})
+</script>
+</body>
+</html>

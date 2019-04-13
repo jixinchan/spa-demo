@@ -3,39 +3,59 @@
 <head>
   <meta charset="UTF-8">
   <title>定时器按钮测试页面</title>
-  <link rel="stylesheet" href="layout.css">
+  <link rel="stylesheet" href="timerbtn.css">
   <link rel="icon" href="https://i.wangding.in/favicon.ico" sizes="48x48" type="image/png">
-  <style>
-  .main{
-    width:200px;
-    height:200px;
-    margin:0 auto;
-    background:red;
-  }
-  
-  </style>
 </head>
 <body>
+<details open>
+  <summary>添加按钮</summary>
+  <form class="form-create-button">
+    <label>初始状态：</label>
+    <input type="radio" name="status" value="true"><label>启用</label>
+    <input type="radio" name="status" value="false" checked><label>禁用</label>
+    <br>
+    <label>禁用时长：</label>
+    <input type="number" min="0" max="100" value="6" autofocus>秒
+    <br>
+    <label>按钮文字：</label>
+    <input type="text" maxlength="5" value="同意" required>
+    <br>
+    <div>
+      <label>事件代码：</label>
+      <textarea cols="30" rows="10">alert('你终于同意了！');</textarea>
+    </div>
+    <input type="submit" value="提交">
+  </form>
+</details>
 <div class="main"></div>
-<input type="button" value="add timer-btn" class="add-btn"/>
-<input type="button" value="del timer-btn" class="del-btn"/>
+
 <script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="main.js"></script>
+<script src="timerbtn.js"></script>
 <script>
 $(function(){
+  var isAble,
+    time=$('input[type="number"]'),
+    title=$('input[type="text"]'),
+    code=$('textarea'),
+    submitBtn=$('form');
   
-  var $btnAdd=$('.add-btn'),$btnDel=$('.del-btn');
-  $btnAdd.click(function(){
-    $timerBtn.init({
-      container:'.main',
-      title:'确定',
-      time:8
-    });
-  });
-  $btnDel.click(function(){
-    $timerBtn.remove();
-  });
-})
+    submitBtn.submit(function(e){
+      e.preventDefault();
+      //被选中的那个
+      isAble=$('input[type="radio"]:checked');
+      
+      //每次返回不同的Btn
+      var btn=timerBtn({
+        'container': '.main',
+        'isAble': isAble.val()==='true',
+        'time': Number(time.val()),
+        'title': title.val()
+      });
+      //响应事件
+      btn.on('timer-button-click', new Function(code.val()));
+    })
+});
+
 </script>
 </body>
 </html>
