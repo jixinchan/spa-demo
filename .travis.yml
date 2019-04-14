@@ -1,9 +1,9 @@
-ge: node_js
+language: node_js
 node_js:
   - "6"
 
 after_script:
-  - npm run build
+  - grunt build
   - cd ./dist
   - git init
   - git config user.name "${USER_NAME}"
