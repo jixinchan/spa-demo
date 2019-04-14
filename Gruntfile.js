@@ -1,53 +1,83 @@
-module.exports = function(grunt){
+/*global module:true*/
+module.exports=function(grunt){
   grunt.initConfig({
-    eslint:{
+    htmlhint:{
       options:{
-        configFile:'.eslintrc.json'
+        htmlhintrc:'.htmlhintrc'
       },
-      target:['./10-timer-button/main.js','./11-password-visual/main.js','./12-range/main.js','./13-progress/main.js']
+      src:['*.html','*-*/*.html']
     },
     csslint:{
       options:{
         csslintrc:'.csslintrc'
       },
-      src:['./10-timer-button/layout.css','./11-password-visual/layout.css','./12-range/layout.css','./13-progress/layout.css']
+      src:['*-*/*.css'],
     },
-    htmlhint:{
+    eslint:{
       options:{
-        htmlhintrc:'.htmlhintrc',
+        configFile:'.eslintrc.json'
       },
-      src:['./10-timer-button/index.html','./11-password-visual/index.html','./12-range/index.html','./13-progress/index.html']
+      target:['*-*/*.js']
     },
-    htmlmin: {
-      options: {
-        collapseWhitespace: true,
-        preserveLineBreaks: false                           
+    htmlmin:{
+      options:{
+        collapseWhitespace:true,
+        preserveLineBreaks:false
       },
-      files: {
-        'dist/10.html':'./10-timer-button/index.html',
-        'dist/11.html':'./12-range/index.html',                             
-        'dist/12.html':'./13-progress/index.html'
-      }                   
+      files:{
+        src:'dist/index.html',
+        dest:'dist/index.html'
+      }
     },
-    cssmin: {
-      'dist/release.css':['./10-timer-button/layout.css','./11-password-visual/layout.css','./12-range/layout.css','./12-range/layout.css']        
+    copy:{
+      html:{
+        src:'./index.html',
+        dest:'./dist/index.html'
+      } 
     },
-    uglify: {
-      release:{
-        files: {
-          'dist/bundle.min.js': 'dist/bundle.js',                   
-        }                   
-      }                
+    concat:{
+      js:{
+        src:['*-*/*.js'],
+        dest:'dist/js/bundle.js'            
+      },
+      css:{
+        src:['*-*/*.css'],
+        dest:'dist/css/bundle.css'
+      }
+    },
+    uglify:{
+      'dist/js/bundle.min.js':'dist/js/bundle.js'
+    },
+    cssmin:{
+      'dist/css/bundle.min.css':'dist/css/bundle.css'
+    },
+    useminPrepare:{
+      html:'index.html',
+      options:{
+        dest:'dist'
+      }
+    },
+    usemin:{
+      html:['dist/index.html']
+    },
+    clean:{
+      end:['dist/css/bundle.css','dist/js/bundle.js','.tmp']
     }
   });
 
-  grunt.loadNpmTasks('grunt-contrib-csslint');
   grunt.loadNpmTasks('grunt-htmlhint');
+  grunt.loadNpmTasks('grunt-contrib-csslint');
   grunt.loadNpmTasks('grunt-eslint');
-  grunt.loadNpmTasks('grunt-contrib-htmlmin');
-  grunt.loadNpmTasks('grunt-contrib-cssmin');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.registerTask('lint', ['htmlhint', 'csslint', 'eslint']);
-  grunt.registerTask('release', ['uglify','cssmin', 'htmlmin']);
 
+  grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-imagemin');
+  grunt.loadNpmTasks('grunt-contrib-htmlmin');
+  grunt.loadNpmTasks('grunt-usemin');
+
+  grunt.registerTask('lint', ['htmlhint', 'csslint', 'eslint']);
+  grunt.registerTask('build', ['copy:html', 'useminPrepare', 'concat', 'uglify', 'cssmin', 'usemin', 'htmlmin', 'clean:end']);
 };

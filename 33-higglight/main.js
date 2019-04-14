@@ -18,6 +18,6 @@ $(function(){
     var $del = $code.find('i.icon-delete');
     $del.click(function(){
       $code.remove();
-    })
+    });
   });
 });

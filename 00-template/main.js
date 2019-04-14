@@ -1,3 +1,4 @@
+/*global $:true*/
 $(function(){
-  console.log('hello world!');
+  
 });

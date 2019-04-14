@@ -1,12 +1,12 @@
-div{
-  width:400px;
+div{ 
   height:60px;
   margin:150px auto 0;
+  width:400px;
 }
 input{
   display:block;
-  width:300px;
   height:30px;
+  width:300px;  
 }
 div #pwdtxt{
   position:absolute;

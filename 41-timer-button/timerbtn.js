@@ -1,17 +1,6 @@
+/*exported timerBtn*/
 /*global $ window:true */
 
-/*
- * $(function(){
- *    ...
- * })
- * 为什么要把函数从这样修改成上面的那样，封装起来？
- * 闭包防止变量污染
- * 这样相当于window.onload之后就执行
- * 而修改成上面的那样，我们封装了对象，
- * 以及对象的函数，可以随时控制函数的执行时间和位置。
- */
-
-/* exported timerButton */
 var timerBtn = function(cfg) {//eslint-disbale-line no-unused-vars
   var enabled = cfg.isAble,              
     time = cfg.time,    
@@ -54,3 +43,16 @@ var timerBtn = function(cfg) {//eslint-disbale-line no-unused-vars
   });
   return $btn;
 };
+
+
+
+/*
+ * $(function(){
+ *    ...
+ * })
+ * 为什么要把函数从这样修改成上面的那样，封装起来？
+ * 闭包防止变量污染
+ * 这样相当于window.onload之后就执行
+ * 而修改成上面的那样，我们封装了对象，
+ * 以及对象的函数，可以随时控制函数的执行时间和位置。
+ */

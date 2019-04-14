@@ -2,19 +2,31 @@
   "name": "spa-demo",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "grunt lint",
+    "build": "grunt build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jixinchan/spa-demo.git"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jixinchan/spa-demo/issues"
+  },
+  "homepage": "https://github.com/jixinchan/spa-demo#readme",
   "devDependencies": {
-    "grunt": "^1.0.3",
+    "grunt": "^1.0.4",
+    "grunt-contrib-clean": "^2.0.0",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-csslint": "^2.0.0",
     "grunt-contrib-cssmin": "^3.0.0",
-    "grunt-contrib-htmlmin": "^3.0.0",
+    "grunt-contrib-htmlmin": "^3.1.0",
     "grunt-contrib-uglify": "^4.0.1",
     "grunt-eslint": "^21.0.0",
-    "grunt-htmlhint": "^0.9.13"
+    "grunt-htmlhint": "^0.9.13",
+    "grunt-usemin": "^3.1.1"
   }
 }

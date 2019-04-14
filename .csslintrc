@@ -3,5 +3,6 @@
   "box-model": false,
   "outline-none": false,
   "box-sizing": false,
+  "order-alphabetical":false
 }
 
